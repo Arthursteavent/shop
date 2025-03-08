@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Her's Collection</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Poppins:wght@300;400;500;600&display=swap');
+
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Root Variables */
+        :root {
+            --primary-color: #CDB38B;
+            --secondary-color: #A58A69;
+            --text-color: #5E4D3A;
+            --bg-color: #F8F4E3;
+            --white-color: #FFFFFF;
+            --font-family: 'Poppins', sans-serif;
+            --font-weight: 400;
+            --navbar-height: 80px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --max-width: 1200px;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-weight: var(--font-weight);
+            background: var(--bg-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ======== NAVBAR ======== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--white-color);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar .logo img {
+            height: 50px;
+        }
+
+        .navbar .logo h1 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .navbar .menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+        }
+
+        .navbar .menu li {
+            margin: 0 10px;
+        }
+
+        .navbar .menu li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .navbar .menu li a:hover,
+        .navbar .menu li a.active {
+            color: var(--white-color);
+            background-color: var(--primary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+
+            .navbar .logo img {
+                height: 40px;
+            }
+
+            .navbar .logo h1 {
+                font-size: 1.2rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .navbar .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: var(--navbar-height);
+                left: 0;
+                background: var(--white-color);
+                text-align: center;
+                box-shadow: var(--shadow);
+                padding: 15px 0;
+                opacity: 0;
+                transform: translateY(-20px); /* Slide from top */
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .navbar .menu.active {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .navbar .menu li {
+                margin: 10px 0;
+            }
+        }
+
+        /* ======== BERANDA ======== */
+        #beranda {
+            min-height: 80vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+            url('https://images.pexels.com/photos/7679444/pexels-photo-7679444.jpeg?cs=srgb&dl=pexels-mart-production-7679444.jpg&fm=jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white-color);
+            text-align: center;
+            padding: 20px;
+            margin-top: var(--navbar-height);
+        }
+
+        #beranda h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #beranda .deskripsi {
+            font-size: 1.1rem;
+            max-width: 700px;
+            padding: 0 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            #beranda h1 {
+                font-size: 2rem;
+            }
+
+            #beranda .deskripsi {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #beranda h1 {
+                font-size: 1.7rem;
+            }
+
+            #beranda .deskripsi {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ======== PRODUK ======== */
+        #product {
+            padding: 40px 20px;
+            text-align: center;
+            background: var(--bg-color);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        #product h1 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            border-radius: 10px;
+            background: var(--white-color);
+            transition: all 0.3s ease-in-out;
+            box-shadow: var(--shadow);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 8px;
+            color: var(--text-color);
+        }
+
+        .card-body {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin: 8px 0;
+            flex-grow: 1;
+        }
+
+        .footer {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        /* ======== KONTAK ======== */
+        #kontak {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--bg-color);
+        }
+
+        #kontak iframe {
+            width: 100%;
+            max-width: var(--max-width);
+            height: 250px;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            #kontak iframe {
+                height: 200px;
+            }
+        }
+
+        /* ======== FOOTER ======== */
+        .footer {
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 15px;
+            text-align: center;
+            margin-top: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--white-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .footer-links a:hover {
+            color: var(--bg-color);
+        }
+
+        /* Responsive Footer */
+        @media (max-width: 600px) {
+            .footer {
+                padding: 10px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .footer-links a {
+                font-size: 0.9rem;
+                padding: 4px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="logo.jpg" alt="Her's Collection Logo">
+            <h1>Her's Collection</h1>
+        </a>
+        <button class="menu-toggle">☰</button>
+        <ul class="menu">
+            <li><a href="#beranda" class="nav-link">Beranda</a></li>
+            <li><a href="#product" class="nav-link">Produk</a></li>
+            <li><a href="#kontak" class="nav-link">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <section id="beranda">
+        <h1>Selamat Datang di Her's Collection</h1>
+        <p class="deskripsi">Kami hadir sebagai destinasi pilihan untuk memenuhi kebutuhan fashion Anda. Kami menawarkan
+            koleksi pakaian yang beragam dengan desain elegan, modern, dan penuh gaya. Dari busana kasual hingga pakaian
+            formal, setiap produk dipilih dengan cermat untuk memberikan kualitas terbaik kepada pelanggan. Dengan harga
+            yang bersahabat dan pelayanan yang ramah, Heriyani Shop menjadi tempat ideal untuk mengekspresikan gaya
+            pribadi Anda. Temukan sentuhan istimewa dalam setiap pilihan fashion Anda bersama kami.</p>
+    </section>
+
+    <section id="product">
+        <h1>Produk Kami</h1>
+        <div class="container">
+            <div class="products-grid">
+                <div class="card">
+                    <img src="https://img.lazcdn.com/g/p/73252fbcc69c79a88849aca442cc924f.jpg" alt="Baju Muslim">
+                    <p class="card-title">Baju Muslim</p>
+                    <p class="card-body">Desain elegan & nyaman.</p>
+                    <p class="footer">Rp. 150.000</p>
+                </div>
+                <div class="card">
+                    <img src="https://img.lazcdn.com/g/p/73252fbcc69c79a88849aca442cc924f.jpg" alt="Baju Muslim">
+                    <p class="card-title">Baju Muslim</p>
+                    <p class="card-body">Desain elegan & nyaman.</p>
+                    <p class="footer">Rp. 150.000</p>
+                </div>
+                <div class="card">
+                    <img src="https://img.lazcdn.com/g/p/73252fbcc69c79a88849aca442cc924f.jpg" alt="Baju Muslim">
+                    <p class="card-title">Baju Muslim</p>
+                    <p class="card-body">Desain elegan & nyaman.</p>
+                    <p class="footer">Rp. 150.000</p>
+                </div>
+                <div class="card">
+                    <img src="https://img.lazcdn.com/g/p/73252fbcc69c79a88849aca442cc924f.jpg" alt="Baju Muslim">
+                    <p class="card-title">Baju Muslim</p>
+                    <p class="card-body">Desain elegan & nyaman.</p>
+                    <p class="footer">Rp. 150.000</p>
+                </div>
+                <div class="card">
+                    <img src="https://img.lazcdn.com/g/p/73252fbcc69c79a88849aca442cc924f.jpg" alt="Baju Muslim">
+                    <p class="card-title">Baju Muslim</p>
+                    <p class="card-body">Desain elegan & nyaman.</p>
+                    <p class="footer">Rp. 150.000</p>
+                </div>
+                <div class="card">
+                    <img src="https://img.lazcdn.com/g/p/73252fbcc69c79a88849aca442cc924f.jpg" alt="Baju Muslim">
+                    <p class="card-title">Baju Muslim</p>
+                    <p class="card-body">Desain elegan & nyaman.</p>
+                    <p class="footer">Rp. 150.000</p>
+                </div>
+                <div class="card">
+                    <img src="https://img.lazcdn.com/g/p/73252fbcc69c79a88849aca442cc924f.jpg" alt="Baju Muslim">
+                    <p class="card-title">Baju Muslim</p>
+                    <p class="card-body">Desain elegan & nyaman.</p>
+                    <p class="footer">Rp. 150.000</p>
+                </div>
+                <div class="card">
+                    <img src="https://img.lazcdn.com/g/p/73252fbcc69c79a88849aca442cc924f.jpg" alt="Baju Muslim">
+                    <p class="card-title">Baju Muslim</p>
+                    <p class="card-body">Desain elegan & nyaman.</p>
+                    <p class="footer">Rp. 150.000</p>
+                </div>
+            </div>
+    </section>
+
+    <section id="kontak">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.819014007681!2d106.8627872!3d-6.287505100000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f30064cbed09%3A0x2b92db4ca180fe0d!2sHer's%20Colection!5e0!3m2!1sid!2sid!4v1741441073163!5m2!1sid!2sid"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://wa.me/NomorWhatsAppAnda" target="_blank">WhatsApp</a>
+            <a href="https://instagram.com/NamaInstagramAnda" target="_blank">Instagram</a>
+            <a href="mailto:AlamatEmailAnda">Email</a>
+        </div>
+        <p>© Her's Collection. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.navbar .menu');
+
+        menuToggle.addEventListener('click', function () {
+            menu.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
